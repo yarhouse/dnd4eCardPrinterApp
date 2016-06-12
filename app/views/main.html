@@ -1,0 +1,99 @@
+<div class="row hidden-print">
+    <div class="col-xs-3 form-group">
+        <h4>
+            Top line is the item name
+        </h4>
+        <h4>
+            Every newline after that is a standard line of text. Any word(s) that come before a first colon ( : ) will get wrapped in bold font weight.
+        </h4>
+        <h4>
+            Use the range input below the text-area to scale the font size for overflowing text in a card.
+        </h4>
+    </div>
+    <div class="col-xs-1 form-group text-right input-labels">
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" ng-model="nameCheck"> Name:
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" ng-model="nameLvl"> Lvl:
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" ng-model="nameCategory"> Category:
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" ng-model="namePrice"> Price:
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" ng-model="nameWeight"> Weight:
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" ng-model="nameDescription"> Description:
+            </label>
+        </div>
+    </div>
+    <div class="col-xs-4 form-group">
+        <textarea class="form-control" ng-model="newCard"></textarea>
+        <input id="" type="range" min="0.1" max="1" step="0.01" ng-model="fontSizing" />
+        <!-- <div class="btn-toolbar" role="toolbar" aria-label="..."> -->
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                <a type="button" class="btn btn-success" ng-click="addNewCard()">+</a>
+                <a type="button" class="btn btn-default" ng-click="clearCookies()">/cookie</a>
+            </div>
+        <!-- </div> -->
+    </div>
+    <div class="col-xs-4 single-card" id="newSingleCard">
+        <div class="wrapper">
+            <div ng-repeat="string in cardOutput track by $index" ng-if="$first" ng-class="{'h4 item-name': $first}" class="item-line">
+                <span ng-bind-html="string"></span>
+            </div>
+            <div ng-repeat="string in cardOutput track by $index" ng-if="!$first" class="item-description" style="font-size: {{fontSizing}}em;">
+                <span ng-bind-html="string"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div ng-repeat="card in cards track by $index" class="col-xs-4 single-card" ng-bind-html="card"></div>
+</div>
+
+
+<br class="hidden-print" />
+<div class="row">
+    <div ng-repeat="card in tempCards" class="col-xs-4 temp-cards single-card">
+        <!-- <div class="wrapper"> -->
+            <div class="item-line h4 item-name">
+                <span>{{card.name}}</span>
+            </div>
+            <div class="item-description">
+                <span><strong>Category:</strong> {{card.category}}</span>
+            </div><div class="item-description">
+                <span><strong>Price:</strong> {{card.price}} </span>
+            </div><div class="item-description">
+                <span><strong>Weight:</strong> {{card.weight}}</span>
+            </div><div class="item-description">
+                <span><strong>Description:</strong> {{card.description}}</span>
+            </div>
+        <!-- </div> -->
+    </div>
+</div>
+
+
+
+
+
+
+
+
