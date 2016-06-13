@@ -36,16 +36,22 @@ textarea.form-control{
 .temp-cards{
     font-size: 0.8em;
 }
-.wrapper{
-    border: 1px solid #CCCCCC;
-    height: 320px;
-}
-.wrapper div[class*="item-"]{
-    position: relative;
-    min-height: 20px;
-    padding: 0px 15px;
-}
 
+#newSingleCard{
+    .item-name{
+        background-color: #D8931C;
+        background: #D8931C;
+        border: 5px solid #D8931C;
+        -webkit-print-color-adjust:exact;
+        color: #FFFFFF;
+        padding: 2px 11px !important;
+        margin: 0px;
+        height: 34px;
+        width: calc(~'100% + 30px');
+        margin-left: -15px;
+        margin-bottom: 5px;
+    }
+}
 .item-name{
     background-color: #D8931C;
     background: #D8931C;
@@ -55,14 +61,21 @@ textarea.form-control{
     padding: 2px 11px !important;
     margin: 0px;
     height: 34px;
-    width: calc(100% + 30px);
+    width: calc(~'100% + 30px');
     margin-left: -15px;
     margin-bottom: 5px;
 }
-.item-level{
-    text-align: right;
-    float: right;
-    font-size: .6em;
+.item-description{
+    &.font-10{font-size: 1em;}
+    &.font-1{font-size: 0.1em;}
+    &.font-2{font-size: 0.2em;}
+    &.font-3{font-size: 0.3em;}
+    &.font-4{font-size: 0.4em;}
+    &.font-5{font-size: 0.5em;}
+    &.font-6{font-size: 0.6em;}
+    &.font-7{font-size: 0.7em;}
+    &.font-8{font-size: 0.8em;}
+    &.font-9{font-size: 0.9em;}
 }
 
 /* Responsive: Portrait tablets and up */
