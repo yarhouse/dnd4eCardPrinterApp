@@ -12,8 +12,10 @@ angular.module('dnd4eCardPrinterApp')
 
     return {
         stripHTML: function (html) {
+            // return html
             return html.replace('/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/g', '')
-                        .replace(/\<\!\-\-\-\-\>/g, '')
+                        .replace(/\<\!\-\- [\w\d\s\!\$\{\}\:\'\-]+ \-\-\>/g, '')
+                        .replace(/\<\!\-\- \-\-\>/g, '')
                         .replace(/\sng\-[\w\d\s\-]+\=\"[\w\d\s\!\$\{\}\:\'\-]+\"/g, '');
         },
         buildLabels: function (string){

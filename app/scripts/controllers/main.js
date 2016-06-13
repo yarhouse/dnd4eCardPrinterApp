@@ -20,7 +20,7 @@ angular.module('dnd4eCardPrinterApp')
 
     var cookies = $cookies.getObject('cards')
     if (cookies){
-        $scope.cards = cookies;
+        // $scope.cards = cookies;
     }
 
     $scope.$watch('newCard', function (newVal, oldVal){
@@ -31,14 +31,34 @@ angular.module('dnd4eCardPrinterApp')
 
     $scope.addNewCard = function(){
         var cleaned = cardBuilder.stripHTML(angular.element('#newSingleCard').html())
+        console.log(cleaned)
         $scope.cards.push(cleaned);
-        $cookies.putObject('cards', $scope.cards);
+        // $cookies.putObject('cards', $scope.cards);
         $scope.newCard = '';
     }
     $scope.clearCookies = function (){
         $cookies.remove('cards');
     }
     $scope.tempCards = tempCards;
+})
+.directive('bindHtmlUnsafe', function( $compile ) {
+    return function( $scope, $element, $attrs ) {
+
+        var compile = function( newHTML ) { // Create re-useable compile function
+            newHTML = $compile(newHTML)($scope); // Compile html
+            $element.html('').append(newHTML); // Clear and append it
+        };
+
+        var htmlName = $attrs.bindHtmlUnsafe; // Get the name of the variable
+                                              // Where the HTML is stored
+
+        $scope.$watch(htmlName, function( newHTML ) { // Watch for changes to
+                                                      // the HTML
+            if(!newHTML) return;
+            compile(newHTML);   // Compile it
+        });
+
+    };
 });
 
 var tempCards = [
