@@ -1,111 +1,118 @@
 <div class="row hidden-print">
     <div class="col-xs-4 form-group">
-        <h4>
-            Copy/paste item data straight from the compendium
-        </h4>
-        <h4>
-            Top line is the item name
-        </h4>
-        <h4>
-            Every newline after that is a standard line of text. Any word(s) that come before a first colon ( : ) will get wrapped in bold font weight.
-        </h4>
-        <h4>
-            Use the range input below the text-area to scale the font size for overflowing text in a card. I recommend 0.8em for most cards
-        </h4>
-    </div>
-    <!-- <div class="col-xs-1 form-group text-right input-labels">
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" ng-model="nameCheck"> Name:
-            </label>
-        </div>
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" ng-model="nameLvl"> Lvl:
-            </label>
-        </div>
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" ng-model="nameCategory"> Category:
-            </label>
-        </div>
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" ng-model="namePrice"> Price:
-            </label>
-        </div>
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" ng-model="nameWeight"> Weight:
-            </label>
-        </div>
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" ng-model="nameDescription"> Description:
-            </label>
-        </div>
-    </div> -->
-    <div class="col-xs-4 form-group">
-        <h4>
-            Paste item data
-        </h4>
-        <textarea class="form-control" ng-model="newCard"></textarea>
-        <input id="" type="range" min="0.1" max="1" step="0.1" ng-model="fontSizing" />
-        <!-- <div class="btn-toolbar" role="toolbar" aria-label="..."> -->
-            <div class="btn-group btn-group-justified-NO" role="group" aria-label="...">
-                <a type="button" class="btn btn-success" ng-click="addNewCard()">+</a>
-                <!-- <a type="button" class="btn btn-default" ng-click="clearCookies()">/cookie</a> -->
+        <div class="form-group pull-right text-right input-labels bg-warning">
+            <div class="checkbox">
+                <label>
+                    <input class="bg-warning" ng-hide="true" type="checkbox" ng-model="nameCheck"> Name:
+                </label>
             </div>
-        <!-- </div> -->
+            <!-- <div class="checkbox">
+                <label>
+                    <input class="bg-warning" ng-hide="true" type="checkbox" ng-model="nameLvl"> Lvl:
+                </label>
+            </div> -->
+            <div class="checkbox">
+                <label>
+                    <input class="bg-warning" ng-hide="true" type="checkbox" ng-model="nameCategory"> Category:
+                </label>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input class="bg-warning" ng-hide="true" type="checkbox" ng-model="namePrice"> Price:
+                </label>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input class="bg-warning" ng-hide="true" type="checkbox" ng-model="nameWeight"> Weight:
+                </label>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input class="bg-warning" ng-hide="true" type="checkbox" ng-model="nameDescription"> Description:
+                </label>
+            </div>
+        </div>
+        <h4>Copy/paste item data straight from the compendium</h4>
+        <p>Top line is the item name</p>
+        <p>Every newline after that is a standard line of text. Any word(s) from copy/paste that come before a first colon : will get wrapped in bold font weight. Mundane gear labels are default, but are overridden by any other beinging 'Label:'</p>
+        <p>Use the range input below the text-area to scale the font size for overflowing text in a card. I recommend 0.8em for most cards, and each is mutable per card to freely adjust for printing.</p>
+        <p>
+            <a ng-click="addDefaults()" class="btn btn-primary">
+                <span class="glyphicon glyphicon-duplicate"></span>
+            </a>
+            Add/Replace with default items
+        </p>
+        <p>
+            <a ng-click="sortMode = !sortMode" class="btn "  ng-class="{'btn-success': sortMode, 'btn-default': !sortMode}">
+                <span class="glyphicon" ng-class="{'glyphicon-ok': sortMode, 'glyphicon-remove': !sortMode}"></span>
+            </a>
+            Toggle sorting mode
+        </p>
+    </div>
+    <div class="col-xs-4 form-group">
+        <h4>Paste item data</h4>
+        <textarea class="form-control" ng-model="newCardString" ng-disabled="sortMode" wrap='off'></textarea>
+        <input id="" type="range" min="0.1" max="1" step="0.1" ng-model="fontSizing" ng-disabled="sortMode" />
+        <div class="btn-group btn-group-justified-NO" role="group" aria-label="...">
+            <a type="button" class="btn btn-success" ng-click="addNewCard(newCardString, fontSizing)" ng-disabled="sortMode">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            </a>
+        </div>
         <div class="pull-right">
             <h4>{{fontSizing}}em</h4>
         </div>
     </div>
     <div class="col-xs-4" id="">
-        <h4>
-            Preview
-        </h4>
+        <h4>Preview</h4>
     </div>
     <div class="col-xs-4 single-card" id="newSingleCard">
-        <div ng-repeat="string in cardOutput track by $index" ng-if="$first" ng-class="{'h4 item-name': $first}" class="item-line">
-            <span ng-bind-html="string"></span>
+        <div class="item-line h4 item-name">
+            <span>{{newCardObject.name}}</span>
         </div>
-        <div ng-repeat="string in cardOutput track by $index" ng-if="!$first" class="item-description" ng-class="'font-'+(fontSizing*10)" style="font-size: {{fontSizing}}em;">
-            <span ng-bind-html="string"></span>
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div ng-repeat="card in cards track by $index" class="col-xs-4 single-card" ng-bind-html="card"></div>
-</div>
-
-
-<br class="hidden-print" />
-<h3 class="hidden-print">Examples</h3>
-<div class="row hidden-print">
-    <div ng-repeat="card in tempCards" class="col-xs-4 temp-cards single-card">
-        <!-- <div class="wrapper"> -->
-            <div class="item-line h4 item-name">
-                <span>{{card.name}}</span>
+        <div class="wrapper" style="font-size: {{fontSizing}}em;">
+            <div class="item-description">
+                <strong ng-if="beginsWithCarat(newCardObject.category)">Category: </strong><span ng-bind-html="newCardObject.category"></span>
             </div>
             <div class="item-description">
-                <span><strong>Category:</strong> {{card.category}}</span>
-            </div><div class="item-description">
-                <span><strong>Price:</strong> {{card.price}} </span>
-            </div><div class="item-description">
-                <span><strong>Weight:</strong> {{card.weight}}</span>
-            </div><div class="item-description">
-                <span><strong>Description:</strong> {{card.description}}</span>
+                <strong ng-if="beginsWithCarat(newCardObject.price)">Price: </strong><span ng-bind-html="newCardObject.price"></span>
             </div>
-        <!-- </div> -->
+            <div class="item-description">
+                <strong ng-if="beginsWithCarat(newCardObject.weight)">Weight: </strong><span ng-bind-html="newCardObject.weight"></span>
+            </div>
+            <div class="item-description">
+                <strong ng-if="beginsWithCarat(newCardObject.description)">Description: </strong><span ng-bind-html="newCardObject.description"></span>
+            </div>
+        </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
+<br class="hidden-print" />
+<div class="row" ui-sortable="sortingOptions" ng-model="cards">
+    <div ng-if="cards.length > 0" ng-repeat="card in cards track by $index" class="col-xs-4 temp-cards single-card" ng-class="{'print-break': multipuleOfNine($index)}">
+        <div class="item-line h4 item-name" ng-class="{draghandle:sortMode}">
+            <span>{{card.name}}</span>
+        </div>
+        <div class="wrapper" style="font-size: {{card.fontSize}}em;" ng-hide="sortMode">
+            <div class="item-description">
+                <strong ng-if="beginsWithCarat(card.category)">Category: </strong><span ng-bind-html="card.category"></span>
+            </div>
+            <div class="item-description">
+                <strong ng-if="beginsWithCarat(card.price)">Price: </strong><span ng-bind-html="card.price"></span>
+            </div>
+            <div class="item-description">
+                <strong ng-if="beginsWithCarat(card.weight)">Weight: </strong><span ng-bind-html="card.weight"></span>
+            </div>
+            <div class="item-description">
+                <strong ng-if="beginsWithCarat(card.description)">Description: </strong><span ng-bind-html="card.description"></span>
+            </div>
+        </div>
+        <div class="hidden-print" ng-hide="sortMode">
+            <input id="" type="range" min="0.1" max="1" step="0.1" ng-model="card.fontSize" ng-hide="sortMode" />
+            <a class="btn btn-sm btn-danger" ng-click="removeCard($index)" ng-hide="sortMode">
+                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+            </a>
+            <div class="pull-right" ng-hide="sortMode">
+                <h4>{{card.fontSize}}em</h4>
+            </div>
+        </div>
+    </div>
+</div>

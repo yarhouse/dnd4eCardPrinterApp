@@ -18,26 +18,60 @@ textarea.form-control{
     min-width: 100%;
 
 }
-.input-labels div.checkbox{
-    margin-top: 0px;
-    margin-bottom: 0px;
-    margin-right: -26px;
+.input-labels{
+    margin-right: -31px;
+    margin-top: 39px;
+    margin-left: 5px;
+    border: 2px solid #CCCCCC;
+    padding-right: 3px;
+    border-radius: 4px;
+    div.checkbox{
+        margin-top: 0px;
+        margin-bottom: 0px;
+        padding-left: 0px;
+        label{
+            padding-left: 5px;
+        }
+    }
+    div.checkbox:first-of-type{
+        padding-top: 5px;
+    }
 }
-.input-labels div:first-of-type{
-    margin-top: 7px;
+
+.draghandle {
+    cursor: move;
+    cursor: -webkit-grab;
+    &:active {
+        cursor: -webkit-grabbing;
+    }
 }
 .single-card{
-    height: 320px;
-    /*font-size:1em;*/
     border: 3px solid #CCCCCC;
-    /*height: 320px;*/
-    /*margin: 2px;*/
-}
-.temp-cards{
-    font-size: 0.8em;
+    .item-name{
+        background-color: #D8931C;
+        background: #D8931C;
+        border: 5px solid #D8931C;
+        -webkit-print-color-adjust:exact;
+        color: #FFFFFF;
+        padding: 2px 11px !important;
+        margin: 0px;
+        height: 34px;
+        max-height: 34px;
+        min-height: 34px;
+        width: calc(~'100% + 30px');
+        margin-left: -15px;
+        margin-bottom: 5px;
+    }
+    .wrapper{
+        height: calc(~'320px - 34px');
+        max-height: calc(~'320px - 38px');
+        min-height: calc(~'320px - 38px');
+    }
+    &.print-break {page-break-after: always;}
 }
 
 #newSingleCard{
+    height: 320px;
     .item-name{
         background-color: #D8931C;
         background: #D8931C;
@@ -52,38 +86,42 @@ textarea.form-control{
         margin-bottom: 5px;
     }
 }
-.item-name{
-    background-color: #D8931C;
-    background: #D8931C;
-    border: 5px solid #D8931C;
-    -webkit-print-color-adjust:exact;
-    color: #FFFFFF;
-    padding: 2px 11px !important;
-    margin: 0px;
-    height: 34px;
-    width: calc(~'100% + 30px');
-    margin-left: -15px;
-    margin-bottom: 5px;
-}
-.item-description{
-    &.font-10{font-size: 1em;}
-    &.font-1{font-size: 0.1em;}
-    &.font-2{font-size: 0.2em;}
-    &.font-3{font-size: 0.3em;}
-    &.font-4{font-size: 0.4em;}
-    &.font-5{font-size: 0.5em;}
-    &.font-6{font-size: 0.6em;}
-    &.font-7{font-size: 0.7em;}
-    &.font-8{font-size: 0.8em;}
-    &.font-9{font-size: 0.9em;}
-}
+// .item-name{
+//     background-color: #D8931C;
+//     background: #D8931C;
+//     border: 5px solid #D8931C;
+//     -webkit-print-color-adjust:exact;
+//     color: #FFFFFF;
+//     padding: 2px 11px !important;
+//     margin: 0px;
+//     height: 34px;
+//     width: calc(~'100% + 30px');
+//     margin-left: -15px;
+//     margin-bottom: 5px;
+// }
+// .item-description{
+//     &.font-10{font-size: 1em;}
+//     &.font-1{font-size: 0.1em;}
+//     &.font-2{font-size: 0.2em;}
+//     &.font-3{font-size: 0.3em;}
+//     &.font-4{font-size: 0.4em;}
+//     &.font-5{font-size: 0.5em;}
+//     &.font-6{font-size: 0.6em;}
+//     &.font-7{font-size: 0.7em;}
+//     &.font-8{font-size: 0.8em;}
+//     &.font-9{font-size: 0.9em;}
+// }
+// .print-break {border-color: red}
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
-  .container {
-    /*max-width: 730px;*/
-  }
+
 }
 @media print {
+    .container {
+        max-width: 730px;
+    }
     * {-webkit-print-color-adjust: exact}
+    .print-break {page-break-after: always;}
+
 }
